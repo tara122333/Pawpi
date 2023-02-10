@@ -6,6 +6,7 @@ import {RxDividerVertical} from "react-icons/rx";
 import {CgSearch} from "react-icons/cg";
 import {RiShoppingCartLine} from "react-icons/ri";
 import {CgProfile} from "react-icons/cg";
+import LOGO from "../../pawpi_logo.png";
 
 //for small devices/mobile
 const NavSm=()=>{
@@ -31,11 +32,13 @@ const NavLg=()=>{
     <>
       <div className="w-full ">
         <div className="flex items-center justify-between px-12 py-2 h-16 w-full ">
-          <div className="w-1/6 h-full ">
-            <img src="https://st3.depositphotos.com/4265001/14374/v/600/depositphotos_143741679-stock-illustration-dog-logo-illustration.jpg"
+          <div className="w-1/6 h-full">
+            <div className="w-28 h-28">
+            <img src={LOGO}
             alt="logo"
             className="w-full h-full"
             />
+            </div>
           </div>
 
           <div className="flex items-center w-3/5 h-4/5 mx-4 gap-2 bg-white px-2 rounded-3xl border border-black shadow-md shadow-slate-500">
