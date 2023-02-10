@@ -1,9 +1,12 @@
+import DefaultHOC from "./HOC/DefaultHOC";
+
+
 function App() {
   return (
-    <div className="App">
-      <h1>This is App.jsx File</h1>
-    </div>
+    <>
+      <DefaultHOC path="/"/>
+    </>
   );
-}
+};
 
 export default App;

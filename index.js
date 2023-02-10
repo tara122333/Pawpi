@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 console.log("skd");
 <<<<<<< HEAD
 console.log("This is testign ")
@@ -7,4 +8,6 @@ console.log("This is collaboration ")
 console.log("jhvchjbv")
 
 shubham is boss
+>>>>>>> Shubham
+=======
 >>>>>>> Shubham
