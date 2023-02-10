@@ -1,5 +1,5 @@
 import express from 'express';
-
+require("./database/AllModals");
 const app = express();
 
 const port = 4000;
