@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {GrLocation} from "react-icons/gr";
 import {TbChevronDown} from "react-icons/tb";
 import {TbChevronUp} from "react-icons/tb";
@@ -27,13 +27,21 @@ const NavMd=()=>{
 
 //for large devices
 const NavLg=()=>{
+
+  var temp = true;
+  const [isTemp, setIsTemp] = useState(false);
+  function cha(){
+    console.log("clicked");
+    temp = false;
+    return temp;
+  }
   return(
     <>
       <div className="w-full h-20 flex justify-center items-center">
         <div className="flex items-center justify-between px-12 py-2 h-16 w-full gap-5">
           <div className="w-1/6 h-full flex justify-center items-center">
             <div className='w-20 h-20'>
-              <img src="https://st3.depositphotos.com/4265001/14374/v/600/depositphotos_143741679-stock-illustration-dog-logo-illustration.jpg"
+              <img src="https://i.ibb.co/4SPWQ6t/Whats-App-Image-2023-02-10-at-22-50-36.jpg"
               alt="logo"
               className="w-full h-full"
               />
@@ -50,9 +58,11 @@ const NavLg=()=>{
                   placeholder="Location"
                   />
                 </div>
-                <div className="text-2xl flex items-center">
-                  {/* <TbChevronDown /> */}
-                  <TbChevronUp />
+                <div className="text-2xl flex items-center cursor-pointer">
+                  
+                  {
+                    isTemp ? <TbChevronDown onClick={() => setIsTemp((prev) => !prev)} /> : <TbChevronUp  onClick={() => setIsTemp((prev) => !prev)}/>
+                  }
                 </div>
 
               </div>
