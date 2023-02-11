@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {VscLocation} from "react-icons/vsc";
 import {TbChevronDown,TbChevronUp} from "react-icons/tb";
 import {RxDividerVertical} from "react-icons/rx";
@@ -12,7 +12,7 @@ import LOGO from "../../pawpi_logo.png";
 const NavSm=()=>{
   return(
     <>
-      <div className="h-24 w-full shadow-lg shadow-slate-500 bg-creame">
+      <div className="h-24 w-full shadow-lg py-1 bg-creame">
         <div className="w-full h-3/5 flex items-center justify-around px-2 ">
           <div className="w-1/5 h-full flex items-center justify-start">
             <FiMenu className="text-2xl"/>
@@ -65,12 +65,13 @@ const NavMd=()=>{
 
 //for large devices
 const NavLg=()=>{
+  const [isTemp , setIsTemp] = useState(false);
   return(
     <>
-      <div className="w-full h-32 ">
+      <div className="w-full h-32 bg-creame shadow-xl">
         <div className="flex items-center justify-between px-12 py-2 h-1/2 w-full">
           <div className="w-1/6 h-full flex items-center justify-center">
-            <div className="w-24 h-20 ">
+            <div className="w-24 h-20 cursor-pointer">
             <img src={LOGO}
             alt="logo"
             className="w-full h-full"
@@ -82,13 +83,17 @@ const NavLg=()=>{
             <VscLocation className="text-4xl"/>
              
               <input type="search"
-              className="w-44 h-full text-md text-blue-500 outline-none"
+              className="w-44 h-full text-md text-blue-500 outline-none "
               placeholder="Location "
+              onClick={ ()=> setIsTemp((prev)=> !prev) }
               />
 
-              <div className="text-2xl flex items-center py-2">
-                <TbChevronDown />
-                <TbChevronUp />
+              <div className="text-2xl flex items-center py-2 cursor-pointer">
+                
+                
+                {
+                  isTemp ? <TbChevronUp onClick={ ()=> setIsTemp((prev)=> !prev) }/> : <TbChevronDown onClick={ ()=> setIsTemp((prev)=> !prev) } />
+                }
               </div>
 
               <RxDividerVertical className="mx-2 text-4xl"/>
@@ -100,15 +105,15 @@ const NavLg=()=>{
               />
           </div>
 
-          <div className="w-1/4 bg-white flex items-center h-4/5 text-xl">
-            <div className="flex items-center justify-center w-full gap-2 hover:bg-orange-300 hover:border border-blue-500 rounded-xl hover:text-blue-500 cursor-pointer">
-              <RiShoppingCartLine/>
+          <div className="w-1/4 flex items-center h-4/5 text-xl gap-3">
+            <div className="flex items-center justify-center w-full gap-2 py-2 bg-royal-green text-white hover:bg-orange-200 hover:border border-blue-700 rounded-xl hover:text-blue-700 cursor-pointer">
+              <RiShoppingCartLine className="text-3xl"/>
               <h1>My Cart</h1>
             </div>
 
-            <div className="flex items-center justify-center w-full gap-2 hover:bg-orange-300 hover:border border-blue-500 rounded-xl hover:text-blue-500 cursor-pointer">
-              <CgProfile/>
-              <h1>My Profile</h1>
+            <div className="flex items-center justify-center w-full gap-2 py-2 bg-royal-green text-white hover:bg-orange-200 hover:border border-blue-700 rounded-xl hover:text-blue-700 cursor-pointer">
+              <CgProfile className="text-3xl"/>
+              <h1>Account</h1>
             </div>
           </div>
         </div>
