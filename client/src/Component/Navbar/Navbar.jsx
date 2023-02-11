@@ -1,18 +1,46 @@
 import React from 'react';
 import {VscLocation} from "react-icons/vsc";
-import {TbChevronDown} from "react-icons/tb";
-import {TbChevronUp} from "react-icons/tb";
+import {TbChevronDown,TbChevronUp} from "react-icons/tb";
 import {RxDividerVertical} from "react-icons/rx";
-import {CgSearch} from "react-icons/cg";
+import {CgSearch,CgProfile} from "react-icons/cg";
 import {RiShoppingCartLine} from "react-icons/ri";
-import {CgProfile} from "react-icons/cg";
+import {FiMenu} from "react-icons/fi";
 import LOGO from "../../pawpi_logo.png";
 
 //for small devices/mobile
 const NavSm=()=>{
   return(
     <>
-      <h1>hi there</h1>
+      <div className="h-full w-full bg-red-400">
+        <div className="w-full h-1/2 flex items-center">
+          <div>
+            <FiMenu/>
+          </div>
+
+          <div>
+            <div>
+              <img src={LOGO}
+                alt="logo"
+                className="w-full h-full"
+              />
+            </div>
+          </div>
+
+          <div>
+            Cart
+          </div>
+        </div>
+
+        <div>
+          <div>
+            Location
+          </div>
+          <div>
+            search
+          </div>
+        </div>
+
+      </div>
     </>
   );
 };
@@ -30,10 +58,10 @@ const NavMd=()=>{
 const NavLg=()=>{
   return(
     <>
-      <div className="w-full ">
-        <div className="flex items-center justify-between px-12 py-2 h-16 w-full ">
-          <div className="w-1/6 h-full">
-            <div className="w-28 h-28">
+      <div className="w-full h-32 ">
+        <div className="flex items-center justify-between px-12 py-2 h-1/2 w-full">
+          <div className="w-1/6 h-full flex items-center justify-center">
+            <div className="w-24 h-20 ">
             <img src={LOGO}
             alt="logo"
             className="w-full h-full"
@@ -75,7 +103,30 @@ const NavLg=()=>{
             </div>
           </div>
         </div>
-
+        
+        <div className="flex items-center justify-center px-12 py-2  h-1/2 text-xl">
+          <div className="w-1/6 flex justify-center hover:text-blue-500 hover:text-2xl cursor-pointer">
+            <h1>Dogs</h1>
+          </div>
+          <div className="w-1/6 flex justify-center hover:text-blue-500 hover:text-2xl cursor-pointer">
+            <h1>Cats</h1>
+          </div>
+          <div className="w-1/6 flex justify-center hover:text-blue-500 hover:text-2xl cursor-pointer">
+            <h1>Shop By Brands</h1>
+          </div>
+          <div className="w-1/6 flex justify-center hover:text-blue-500 hover:text-2xl cursor-pointer">
+            <h1>Know Your Pet</h1>
+          </div>
+          <div className="w-1/6 flex justify-center hover:text-blue-500 hover:text-2xl cursor-pointer">
+            <h1>Vet</h1>
+          </div>
+          <div className="w-1/6 flex justify-center hover:text-blue-500 hover:text-2xl cursor-pointer">
+            <h1>About Us!</h1>
+          </div>
+          <div className="w-1/6 flex justify-center hover:text-blue-500 hover:text-2xl cursor-pointer">
+            <h1>Join Us</h1>
+          </div>
+        </div>
       </div>
     </>
   );
