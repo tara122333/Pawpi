@@ -5,20 +5,21 @@ import {RxDividerVertical} from "react-icons/rx";
 import {CgSearch,CgProfile} from "react-icons/cg";
 import {RiShoppingCartLine} from "react-icons/ri";
 import {FiMenu} from "react-icons/fi";
+import {MdOutlineLocationOn} from "react-icons/md";
 import LOGO from "../../pawpi_logo.png";
 
 //for small devices/mobile
 const NavSm=()=>{
   return(
     <>
-      <div className="h-full w-full bg-red-400">
-        <div className="w-full h-1/2 flex items-center">
-          <div>
-            <FiMenu/>
+      <div className="h-24 w-full shadow-lg shadow-slate-500 bg-creame">
+        <div className="w-full h-3/5 flex items-center justify-around px-2 ">
+          <div className="w-1/5 h-full flex items-center justify-start">
+            <FiMenu className="text-2xl"/>
           </div>
 
-          <div>
-            <div>
+          <div className="w-3/5 h-full flex justify-center">
+            <div className="w-36 h-24">
               <img src={LOGO}
                 alt="logo"
                 className="w-full h-full"
@@ -26,18 +27,26 @@ const NavSm=()=>{
             </div>
           </div>
 
-          <div>
-            Cart
+          <div className="w-28 py-1 flex items-center gap-1 justify-center bg-royal-green text-white rounded-xl">
+            <RiShoppingCartLine className="text-2xl"/>
+            <div className="text-xl">
+              <h1>Cart</h1>
+            </div>
           </div>
         </div>
 
-        <div>
-          <div>
-            Location
+        <div className="h-auto w-full flex items-center justify-between px-2 py-2">
+          <div className="w-1/3 h-full flex items-center justify-start">
+              <CgSearch className="text-2xl"/>
           </div>
-          <div>
-            search
+          
+          <div className="w-1/3 h-full flex items-center justify-end gap-1">
+            <MdOutlineLocationOn className="text-2xl"/>
+            <div className="text-xl">
+              <h1>Location</h1>
+            </div>
           </div>
+          
         </div>
 
       </div>
