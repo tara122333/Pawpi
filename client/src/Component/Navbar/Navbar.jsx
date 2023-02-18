@@ -58,7 +58,50 @@ const NavSm=()=>{
 const NavMd=()=>{
   return(
     <>
-      <h1>hi there from medium</h1>
+      <div className="flex items-center justify-between px-12 py-2 h-20 w-full bg-creame shadow-xl">
+          <div className="w-1/7 h-full flex items-center justify-center">
+            <div className="w-24 h-20 cursor-pointer">
+            <img src={LOGO}
+            alt="logo"
+            className="w-full h-full"
+            />
+            </div>
+          </div>
+
+          <div className="flex items-center w-3/5 h-4/5 mx-4 gap-2 bg-white px-2 rounded-3xl border border-black shadow-md shadow-slate-500">
+            <VscLocation className="text-4xl"/>
+             
+              <input type="search"
+              className="w-2/5 h-full text-md text-blue-500 outline-none "
+              placeholder="Location "
+              />
+
+              <div className="text-2xl flex items-center py-2 cursor-pointer">
+                
+                <TbChevronUp />
+                <TbChevronDown /> 
+              </div>
+
+              <RxDividerVertical className="mx-2 text-4xl"/>
+              <CgSearch className="text-2xl "/>
+              
+              <input type="search"
+              className="w-2/3 h-full text-md text-blue-500 outline-none rounded-r-xl"
+              placeholder="Search anything for your pet..."
+              />
+          </div>
+
+          <div className="w-1/5 flex items-center h-4/5 text-xl gap-3">
+            <div className="flex items-center justify-center w-full gap-2 py-2 bg-royal-green text-white hover:bg-orange-200 hover:border border-blue-700 rounded-xl hover:text-blue-700 cursor-pointer">
+              <RiShoppingCartLine className="text-3xl"/>
+              <h1>My Cart</h1>
+            </div>
+          </div>
+
+          <div className="w-1/12 flex justify-center items-center h-4/5 text-4xl pl-4 cursor-pointer">
+            <FiMenu/>
+          </div>
+      </div>
     </>
   );
 };
