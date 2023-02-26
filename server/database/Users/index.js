@@ -17,6 +17,10 @@ const UserSchema = new mongoose.Schema({
         type : String,
 
     },
+    verified : {
+        type : Boolean,
+        default : false,
+    },
     address : [
         {
             type : String
@@ -38,7 +42,7 @@ const UserSchema = new mongoose.Schema({
     //         type :
     //     }
     // ]
-});
+},{timestamps:true});
 
 
 // Methods 
