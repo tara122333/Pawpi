@@ -1,6 +1,7 @@
 // import package and modules
 import { UserModel } from "../../database/Users";
 import express from "express";
+import passport from 'passport';
 
 // Router
 const Router = express.Router();
@@ -47,5 +48,37 @@ Router.post("/signin",async(req,res)=>{
         return res.status(500).json({ error: error.message });
     }
 })
+
+
+/*
+route      ==> /google
+method     ==> get
+Des        ==> google signin
+params     ==> none
+Access     ==> public
+*/
+Router.get("/google",passport.authenticate("google",{
+    scope:[
+        "https://www.googleapis.com/auth/userinfo.profile",
+        "https://www.googleapis.com/auth/userinfo.email",
+    ]
+}));
+
+
+/*
+route      ==> /google/callback
+method     ==> get
+Des        ==> google signin callback
+params     ==> none
+Access     ==> public
+*/
+
+Router.get("/google/callback",passport.authenticate("google",{ failureRedirect: "/" }),
+    (req,res)=>{
+        return res.json(
+            {token : req.session.passport.user.token}
+          );
+    }
+);
 
 export default Router;

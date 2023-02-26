@@ -1,10 +1,18 @@
 // Importing Env Variables
+require("dotenv").config();
 require("./database/AllModals");
 
-// import modules and package
-import express from 'express';
+// import libraries
+import express from 'express'; // express
+import cors from 'cors';  //cors
+import helmet from 'helmet';  //helmet
+import passport from 'passport'; //passport
+const session = require('express-session') // session
 
 const port = 4000;
+
+// config
+import googleAuthConfig from './config/google.config';
 
 // microservice routes
 import Auth from './API/Auth';
@@ -15,10 +23,24 @@ import ConnectDB from'./database/connection';
 // app name
 const pawpi = express();
 
+// session
+pawpi.use(session({
+    resave: false,
+    saveUninitialized: true,
+    secret: 'bla bla bla' 
+  }));
+
+
 // application middlewares
 pawpi.use(express.json());
 pawpi.use(express.urlencoded({ extended: false }));
+pawpi.use(helmet());
+pawpi.use(cors());
+pawpi.use(passport.initialize());
+pawpi.use(passport.session());
 
+// passport config
+googleAuthConfig(passport);
 
 // Application Routes
 pawpi.use("/auth",Auth);

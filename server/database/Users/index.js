@@ -26,6 +26,11 @@ const UserSchema = new mongoose.Schema({
         {
             type : Number
         }
+    ],
+    profilePic : [
+        {
+            type : String
+        }
     ]
     //  according to pet information
     // pet : [
