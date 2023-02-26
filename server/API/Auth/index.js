@@ -22,7 +22,7 @@ Router.post("/signup",async(req,res)=>{
             token, message : "user added successfully",status:"success"
         })
     } catch (error) {
-        return res.status(500).json({ error: error.message });
+        return res.status(500).json({ message : "error",error: error.message });
     }
 })
 
@@ -33,5 +33,19 @@ Des        ==> signUp with email and password
 params     ==> none
 Access     ==> public
 */
+Router.post("/signin",async(req,res)=>{
+    try {
+        console.log(req.body.credentials);
+        const user = await UserModel.findByEmailAndPassword(req.body.credentials);
+        console.log(user);
+        const token = user.generateJwtToken();
+        res.status(200).json({
+            token, status:"success"
+        })
+        
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+})
 
 export default Router;
