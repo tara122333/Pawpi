@@ -1,10 +1,12 @@
 import React from 'react';
-import Navbar from '../Component/Navbar/Navbar';
+import HeroCarousalComponent from '../Components/Components/HeroCarousal/HeroCarousalComponent';
+import Navbar from '../Components/Components/Navbar/Navbar';
 
 const DefaultLayout = () => {
   return (
     <>
         <Navbar/>
+        <HeroCarousalComponent/>
     </>
   );
 };
