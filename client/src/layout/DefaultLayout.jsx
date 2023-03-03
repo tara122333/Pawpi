@@ -1,6 +1,6 @@
 import React from 'react';
-import HeroCarousalComponent from '../Components/Components/HeroCarousal/HeroCarousalComponent';
-import Navbar from '../Components/Components/Navbar/Navbar';
+import HeroCarousalComponent from '../Components/HeroCarousal/HeroCarousalComponent';
+import Navbar from '../Components/Navbar/Navbar';
 
 const DefaultLayout = () => {
   return (

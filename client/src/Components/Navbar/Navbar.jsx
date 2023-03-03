@@ -56,6 +56,7 @@ const NavSm=()=>{
 
 //for medium devices/tablets
 const NavMd=()=>{
+  const [isTemp , setIsTemp] = useState(false);
   return(
     <>
       <div className="flex items-center justify-between px-12 py-2 h-20 w-full bg-creame shadow-xl">
@@ -68,21 +69,22 @@ const NavMd=()=>{
             </div>
           </div>
 
-          <div className="flex items-center w-3/5 h-4/5 mx-4 gap-2 bg-white px-2 rounded-3xl border border-black shadow-md shadow-slate-500">
+          <div className="flex items-center w-3/5 h-4/5 mx-4 gap-1 bg-white px-2 rounded-3xl border border-black shadow-md shadow-slate-500">
             <VscLocation className="text-4xl"/>
              
               <input type="search"
-              className="w-2/5 h-full text-md text-blue-500 outline-none "
+              className="w-1/5 h-full text-md text-blue-500 outline-none "
               placeholder="Location "
+              onClick={ ()=> setIsTemp((prev)=> !prev) }
               />
 
               <div className="text-2xl flex items-center py-2 cursor-pointer">
-                
-                <TbChevronUp />
-                <TbChevronDown /> 
+                {
+                  isTemp ? <TbChevronUp onClick={ ()=> setIsTemp((prev)=> !prev) }/> : <TbChevronDown onClick={ ()=> setIsTemp((prev)=> !prev) } />
+                }
               </div>
 
-              <RxDividerVertical className="mx-2 text-4xl"/>
+              <RxDividerVertical className="text-4xl"/>
               <CgSearch className="text-2xl "/>
               
               <input type="search"
@@ -111,7 +113,7 @@ const NavLg=()=>{
   const [isTemp , setIsTemp] = useState(false);
   return(
     <>
-      <div className="w-full h-32 bg-creame shadow-xl">
+      <div className="w-full h-32 bg-creame shadow-xl pt-1">
         <div className="flex items-center justify-between px-12 py-2 h-1/2 w-full">
           <div className="w-1/6 h-full flex items-center justify-center">
             <div className="w-24 h-20 cursor-pointer">
@@ -132,8 +134,6 @@ const NavLg=()=>{
               />
 
               <div className="text-2xl flex items-center py-2 cursor-pointer">
-                
-                
                 {
                   isTemp ? <TbChevronUp onClick={ ()=> setIsTemp((prev)=> !prev) }/> : <TbChevronDown onClick={ ()=> setIsTemp((prev)=> !prev) } />
                 }
@@ -192,7 +192,7 @@ const NavLg=()=>{
 const Navbar = () => {
   return (
     <>
-      <nav className="navbarclass">
+      <nav>
         
         <div className="md:hidden">
           <NavSm/>
