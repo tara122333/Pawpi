@@ -1,6 +1,6 @@
 // Importing Env Variables
 require("dotenv").config();
-require("./database/AllModals");
+require("./database/AllModels");
 
 // import libraries
 import express from 'express'; // express

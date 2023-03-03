@@ -35,7 +35,7 @@ const UserSchema = new mongoose.Schema({
         {
             type : String
         }
-    ]
+    ],
     //  according to pet information
     // pet : [
     //     {

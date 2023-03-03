@@ -5,7 +5,7 @@ import { UserModel } from "../../database/Users";
 import express from "express";
 import passport from 'passport';
 import transporter from '../../config/config.mail';
-import { UserVerificationModel } from "../../database/AllModals";
+import { UserVerificationModel } from "../../database/AllModels";
 import bcrypt from 'bcryptjs';
 
 // Router
@@ -187,8 +187,6 @@ Router.post("/signin",async(req,res)=>{
         return res.status(500).json({ error: error.message });
     }
 })
-
-
 
 
 /*
