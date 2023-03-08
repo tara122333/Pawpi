@@ -28,12 +28,6 @@ const SellerSchema = new mongoose.Schema({
     },
     website: String,
     contactNumber: Number,
-    reviews: [
-        { 
-            type: mongoose.Types.ObjectId, 
-            ref: "Reviews" 
-        }
-    ],
     photos: {
         type: mongoose.Types.ObjectId,
         ref: "Images",
