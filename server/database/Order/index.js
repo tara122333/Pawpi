@@ -8,7 +8,7 @@ const OrderSchema = new mongoose.Schema(
       },
       orderDetails: [
         {
-          food: { type: mongoose.Types.ObjectId, ref: "Foods" },
+          product: { type: mongoose.Types.ObjectId, ref: "Products" },
           quantity: { type: Number, required: true },
           paymode: { type: String, required: true },
           status: { type: String, default: "Placed" },
