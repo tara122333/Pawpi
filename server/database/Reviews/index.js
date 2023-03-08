@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 
 const ReviewSchema = new mongoose.Schema({
-    food: { 
+    product: { 
         type: mongoose.Types.ObjectId, 
-        ref: "Foods" 
+        ref: "Products" 
     },
-    restaurant: { 
+    seller: { 
         type: mongoose.Types.ObjectId, 
-        ref: "Restaurants" 
+        ref: "Sellers" 
     },
     user: { 
         type: mongoose.Types.ObjectId, 
@@ -21,9 +21,6 @@ const ReviewSchema = new mongoose.Schema({
         type: String, 
         required: true 
     },
-    isRestaurantReview: Boolean,
-
-    isFoodReview: Boolean,
     photos: [
       {
         type: mongoose.Types.ObjectId,
