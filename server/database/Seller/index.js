@@ -39,6 +39,9 @@ const SellerSchema = new mongoose.Schema({
         ref: "Images",
     },
 
+},
+{
+    timestamps: true,
 });
 
 export const SellerModel = mongoose.model("Sellers",SellerSchema);

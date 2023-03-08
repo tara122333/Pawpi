@@ -102,6 +102,9 @@ const ProductSchema = new mongoose.Schema({
         required: true,
     },
 
+},
+{
+    timestamps: true,
 });
 
 export const ProductModel = mongoose.model("Products", ProductSchema);
