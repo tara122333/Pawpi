@@ -40,4 +40,4 @@ const PetSchema = new mongoose.Schema({
 {timestamps:true}
 );
 
-export const PetModel = mongoose.Schema("Pets",PetSchema);
+export const PetModel = mongoose.model("Pets",PetSchema);
