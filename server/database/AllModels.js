@@ -8,6 +8,7 @@ import { CartModel } from './Cart';
 import { ProductModel } from './Products';
 import { PetModel } from './Pet';
 import { SellerModel } from './Seller';
+import { UserForgotPasswordModel } from './Users/forgotPassword';
 
 export {
     UserModel,
@@ -19,5 +20,6 @@ export {
     CartModel,
     ProductModel,
     PetModel,
-    SellerModel
+    SellerModel,
+    UserForgotPasswordModel
 };
