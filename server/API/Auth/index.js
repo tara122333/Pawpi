@@ -115,7 +115,7 @@ url = /reset-password
 des = reset password using email link
 */
 
-Router.get("/reset-password/:userId/:uniqueString",(req,res)=>{
+Router.get("/reset-password/:userId/:uniqueString",async(req,res)=>{
     let {userId,uniqueString} = req.params;
     UserForgotPasswordModel.find({userId}).then((result)=>{
         if(result.length > 0){
@@ -123,7 +123,7 @@ Router.get("/reset-password/:userId/:uniqueString",(req,res)=>{
             const hashUniqueString = result[0].uniqueString;
             if(expireAt < Date.now()){
                 UserForgotPasswordModel.deleteOne({userId}).then((result)=>{
-                    console.log("user UserForgotPasswordModel database has been cleaning");
+                    res.status(501).json({Error : error.message, message : "user users database has been cleaning"});
                 }).catch((error)=>{
                     console.log("user not clearing");
                     res.status(501).json({Error : error.message});
@@ -131,31 +131,13 @@ Router.get("/reset-password/:userId/:uniqueString",(req,res)=>{
             }
             else{
                 bcrypt.compare(uniqueString,hashUniqueString).then((result)=>{
-
                     if(result){
-                        // UserModel.updateOne({_id:userId},{
-                        //     verified : true
-                        // }).then(()=>{
-                        //     console.log("user successfully verified");
-                        //     UserModel.findOne({_id : userId}).then((data)=>{
-                        //         console.log(data);
-                        //         // const token = data.generateAuthToken();
-                        //         // console.log(token);
-                        //     }).catch((error)=>{
-                        //         console.log("token Not generate");
-                        //         res.status(501).json({Error : error.message});
-                        //     })
-                        //     res.status(200).json({
-                        //         message : "Success Verification"
-                        //     });
-                        // }).catch((error)=>{
-                        //     console.log("user not update for varification");
-                        //     res.status(501).json({Error : error.message});
-                        // })
-
+                            res.status(200).json({
+                                message : "Success Verification"
+                            });
                     }
                     else{
-                        console.log("verification passed check your mail");
+                        res.status(501).json({Error : error.message,message : "Invalid data"});
                     }
 
                 }).catch((error)=>{
@@ -166,6 +148,73 @@ Router.get("/reset-password/:userId/:uniqueString",(req,res)=>{
         }
         else{
             console.log("data has been don't exist or Invalid ");
+            res.status(501).json({Error : error.message,message : "data has been don't exist or Invalid "});
+        }
+
+
+    }).catch((error)=>{
+        console.log("user not exist");
+        res.status(501).json({Error : error.message});
+    });
+});
+
+
+
+/* 
+method = post
+access = public
+params = userId and uniqueString
+url = /
+des = varification using email link
+*/
+Router.post("/:userId/:uniqueString",async(req,res)=>{
+    let {userId,uniqueString} = req.params;
+    const {newPassword} = req.body.credentials;
+    UserForgotPasswordModel.find({userId}).then((result)=>{
+        if(result.length > 0){
+            const {expireAt} = result[0];
+            const hashUniqueString = result[0].uniqueString;
+            if(expireAt < Date.now()){
+                UserForgotPasswordModel.deleteOne({userId}).then((result)=>{
+                    res.status(501).json({Error : error.message, message : "user users database has been cleaning"});
+                }).catch((error)=>{
+                    console.log("user not clearing");
+                    res.status(501).json({Error : error.message});
+                })
+            }
+            else{
+                bcrypt.compare(uniqueString,hashUniqueString).then((result)=>{
+                    if(result){
+                            bcrypt.genSalt(8).then((salt)=>{
+                                bcrypt.hash(newPassword,salt).then((hash)=>{
+                                    UserModel.findByIdAndUpdate({_id:userId},{password : hash},{new : true}).then((updatePasswordUser)=>{
+                                        res.status(200).json({
+                                            message : "password has been changed"
+                                        });
+                                    }).catch((error)=>{
+                                        res.status(501).json({Error : error.message, message : "change password not updated"});
+                                    })
+                                }).catch((error)=>{
+                                    res.status(501).json({Error : error.message, message : "hash not generating"});
+                                });
+                            }).catch((error)=>{
+                                res.status(501).json({Error : error.message , message : "salt not generating"});
+                            });                            
+                    }
+                    else{
+                        res.status(501).json({Error : error.message,message : "Invalid data"});
+                    }
+
+                }).catch((error)=>{
+                    console.log("user uniqueString not matches");
+                    res.status(501).json({Error : error.message});
+                })
+            }
+        }
+        else{
+            console.log("data has been don't exist or Invalid ");
+            res.status(501).json({Error : error.message,message : "data has been don't exist or Invalid "});
+
         }
 
 
@@ -178,6 +227,7 @@ Router.get("/reset-password/:userId/:uniqueString",(req,res)=>{
 
 
 
+
 /* 
 method = get
 access = public
@@ -185,7 +235,7 @@ params = userId and uniqueString
 url = /verify
 des = varification using email link
 */
-Router.get("/verify/:userId/:uniqueString",(req,res)=>{
+Router.get("/verify/:userId/:uniqueString",async(req,res)=>{
     let {userId,uniqueString} = req.params;
     UserVerificationModel.find({userId}).then((result)=>{
         if(result.length > 0){
@@ -194,7 +244,7 @@ Router.get("/verify/:userId/:uniqueString",(req,res)=>{
             if(expireAt < Date.now()){
                 UserVerificationModel.deleteOne({userId}).then((result)=>{
                     UserModel.deleteOne({_id : userId}).then(()=>{
-                        console.log("user users database has been cleaning");
+                        res.status(501).json({Error : error.message, message : "user users database has been cleaning"});
                     }).catch((error)=>{
                         console.log("users database not clearing for expire time");
                     res.status(501).json({Error : error.message});
@@ -241,6 +291,8 @@ Router.get("/verify/:userId/:uniqueString",(req,res)=>{
         }
         else{
             console.log("data has been don't exist or already verified");
+            res.status(501).json({Error : error.message,message : "data has been don't exist or Invalid "});
+
         }
 
 
@@ -312,6 +364,7 @@ Router.post("/forgot-password",async(req,res)=>{
     try {
         const user = await UserModel.findByEmail(req.body.credentials);
         if(user){
+            await UserForgotPasswordModel.findOneAndDelete({userId : user._id});
             sendforgotpasswordmail(user);
         }
         res.status(200).json({
