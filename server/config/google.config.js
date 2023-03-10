@@ -17,6 +17,7 @@ export default (passport) => {
                 fullname:profile.displayName,
                 email:profile.emails[0].value,
                 profilePic : profile.photos[0].value,
+                verified : true,
             };
             try {
                 // check if the user exist
