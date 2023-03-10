@@ -50,8 +50,11 @@ UserSchema.methods.generateJwtToken = function(){
 UserSchema.statics.findByEmailAndPhone = async({email,phoneNumber})=>{
     const checkUserMobile = await UserModel.findOne({phoneNumber});
     const checkUserEmail = await UserModel.findOne({email});
-    if(checkUserEmail || checkUserMobile){
-        throw new Error("User already exits....");
+    if(checkUserEmail){
+        return checkUserEmail;
+    }
+    if(checkUserMobile){
+        return checkUserMobile;
     }
     return false;
 }

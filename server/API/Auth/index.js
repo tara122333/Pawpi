@@ -316,10 +316,29 @@ Access     ==> public
 
 Router.post("/signup",async(req,res)=>{
     try {
-        await UserModel.findByEmailAndPhone(req.body.credentials);
-        const newUser = await UserModel.create(req.body.credentials);
-        sendvarificationmail(newUser);
-        const token = newUser.generateJwtToken();
+        const userdata = await UserModel.findByEmailAndPhone(req.body.credentials);
+        if(userdata){
+            if(userdata.verified){
+                res.status(200).json({
+                    message : "user already exist and verified",status:"success"
+               });
+            }
+            else{
+                await UserVerificationModel.findOneAndDelete({userId : userdata._id});
+                sendvarificationmail(userdata);
+                res.status(200).json({
+                    message : "user already exist and Not verified",status:"success"
+               });
+            }
+        }
+        else{
+            const newUser = await UserModel.create(req.body.credentials);
+            const token = newUser.generateJwtToken();
+            sendvarificationmail(newUser);
+            res.status(200).json({
+                token, message : "user added successfully",status:"success"
+            });
+        }        
         res.status(200).json({
             token, message : "user added successfully",status:"success"
         })
@@ -342,10 +361,18 @@ Router.post("/signin",async(req,res)=>{
         console.log(req.body.credentials);
         const user = await UserModel.findByEmailAndPassword(req.body.credentials);
         console.log(user);
-        const token = user.generateJwtToken();
-        res.status(200).json({
-            token, status:"success"
-        })
+        if(user.verified){
+            const token = user.generateJwtToken();
+            res.status(200).json({
+                token, status:"success"
+            });
+        }
+        else{
+            res.status(501).json({
+                 status:"user not verified"
+            });
+        }
+        
         
     } catch (error) {
         return res.status(500).json({ error: error.message });
@@ -363,13 +390,20 @@ Access     ==> public
 Router.post("/forgot-password",async(req,res)=>{
     try {
         const user = await UserModel.findByEmail(req.body.credentials);
-        if(user){
-            await UserForgotPasswordModel.findOneAndDelete({userId : user._id});
-            sendforgotpasswordmail(user);
+        if(user.verified){
+                await UserForgotPasswordModel.findOneAndDelete({userId : user._id});
+                sendforgotpasswordmail(user);
+
+            res.status(200).json({
+                user, status:"success"
+            })
         }
-        res.status(200).json({
-            user, status:"success"
-        })
+        else{
+            res.status(501).json({
+                status:"user not verified"
+            })
+        }
+        
 
     } catch (error) {
         return res.status(500).json({ error: error.message });
