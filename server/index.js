@@ -16,6 +16,7 @@ import googleAuthConfig from './config/google.config';
 
 // microservice routes
 import Auth from './API/Auth';
+import Image from './API/Image';
 
 // Database conncetion
 import ConnectDB from'./database/connection';
@@ -44,6 +45,7 @@ googleAuthConfig(passport);
 
 // Application Routes
 pawpi.use("/auth",Auth);
+pawpi.use("/image",Image);
 
 pawpi.get("/",async(req,res)=>{
     res.json({message : "Success"});

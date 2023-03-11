@@ -10,7 +10,7 @@
   "author": "Mr. Tara Chand Kumawat",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.1327.0",
+    "aws-sdk": "^2.1333.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
