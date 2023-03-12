@@ -11,6 +11,27 @@ const upload = multer({storage});
 
 /*
 Route     /
+Des       get image to s3 bucket;
+Params    _id            
+Access    Public
+Method    GET  
+*/
+Router.get("/:_id",async(req,res)=>{
+    try {
+        const image = await ImageModel.findById(req.params._id);
+        res.status(200).json({image});
+    } catch (error) {
+        return res.status(500).json({error : error.message});
+    }
+});
+
+
+
+
+
+
+/*
+Route     /
 Des       upload given image to s3 bucket, and saves file link to mongodb 
 Params    none            
 Access    Public
@@ -32,11 +53,8 @@ Router.post("/", upload.single("file"),async(req,res)=>{
                 location : uploadImage.Location
             }
         }
-        console.log(uploadImage);
-        console.log(newImage);
         const imagedata = await ImageModel.create(newImage);
-        console.log(imagedata);
-        return res.status(200).json({uploadImage});
+        return res.status(200).json({imagedata});
     } catch (error) {
         return res.status(500).json({error : error.message});
         
